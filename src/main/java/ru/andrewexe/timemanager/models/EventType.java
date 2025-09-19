@@ -10,8 +10,13 @@ public class EventType
     @Id
     @GeneratedValue
     @Column(name = "type_id")
-    private long Id;
+    private Long Id;
 
     @Column(name = "type_name")
     private String name;
+
+    public EventType(Long id, String name) {
+        Id = id;
+        this.name = name;
+    }
 }

@@ -28,11 +28,17 @@ public class Event {
 
     // TODO: add json
 
-    @OneToMany(mappedBy = "parentEvent", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Event> childEvents = new ArrayList<>();
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_event_id")
     private Event parentEvent;
 
+    @OneToMany(mappedBy = "parentEvent", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Event> childEvents = new ArrayList<>();
+
+    public Event(String name, ZonedDateTime startDateTime, ZonedDateTime endDateTime, Event previousEvent) {
+        this.name = name;
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
+        this.parentEvent = previousEvent;
+    }
 }
